@@ -72,3 +72,9 @@ Finally, `kubectl` needs to be configured in order to connect the Kubernetes clu
 To check the connection to the cluster, let's show the nodes.
 
     kubectl get nodes
+
+### Delete the cluster
+
+When the cluster isn't needed anymore, it's possible to delete the entire resource group.
+
+    az group delete --name k8sgroup --yes --no-wait
