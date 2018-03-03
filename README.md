@@ -1,6 +1,6 @@
 # enmasse-aks
 
-About deploying EnMasse on Azure Container Service (AKS)
+About deploying EnMasse on a Kubernetes cluster provided by Azure Container Service (AKS).
 
 ## Azure CLI
 
@@ -31,3 +31,44 @@ The next step is executing the login as described [here](https://docs.microsoft.
 
 And follow the procedure using the provided code in the related page in the web browswer.
 On success, JSON string is printed on the console containing all the information about the logged user and the related Azure subscription.
+
+## Azure Container Service (AKS)
+
+AKS is an Azure service which simplify the deployment, management and operations of Kubernetes. In order to deploy a Kubernetes cluster on Azure, you can avoid to create different VMs for the nodes and then installing Kubernetes on the bare metal making the cluster.
+AKS is a fully managed Kubernetes container orchestration service which deploy a Kubernetes cluster for you in a really simple way.
+
+> Other than Kubernetes, AKS supports other orchestrators like Docker Swarm or CD/OS
+
+### Enabling AKS
+
+At the time of writing, AKS is still in preview so it's needed to "enable" it for the current subscription.
+
+    az provider register -n Microsoft.ContainerService
+
+The Kubernetes cluster that we are going to deploy is made by different Azure resources which need to be grouped. For this reason creating a resource group is the next step in the cluster creation process.
+
+    az group create --name k8sgroup --location westeurope
+
+### Provisioning the Kubernetes cluster
+
+In order to deploy a Kubernetes cluster named `k8scluster` with only `1` node and using the previously created resource group `k8sgroup` for grouping all the related Azure resources, run the following command.
+
+    az aks create --resource-group k8sgroup --name k8scluster --node-count 1 --generate-ssh-keys
+
+The command needs several minutes to complete and after that it return a JSON string with all the cluster information.
+
+### Connect to the cluster
+
+In order to interact with the Kubernetes cluster, the `kubectl` tool is needed. For installation and set up information see [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+
+Another simple way to install `kubectl` is through the Azure CLI.
+
+    az aks install-cli
+
+Finally, `kubectl` needs to be configured in order to connect the Kubernetes cluster.
+
+    az aks get-credentials --resource-group k8sgroup --name k8scluster
+
+To check the connection to the cluster, let's show the nodes.
+
+    kubectl get nodes
