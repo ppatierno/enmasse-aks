@@ -104,7 +104,7 @@ After a while a set of Pods should be running :
     qdrouterd-3390838898-33jx5           2/2       Running   1          52s
     subserv-3643744501-n2925             1/1       Running   0          52s
 
-Other than the deployed services, it's useful to exposing the REST API as well.
+Other than the deployed services, it's useful to exposing the REST API as well in order to create addresses using the command line sending HTTP requests using `curl`.
 
     kubectl apply -f kubernetes/addons/external-lb.yaml -n enmasse    
 
@@ -177,6 +177,8 @@ It's needed to POST this JSON file to the REST API.
 
 The addresses will be created in the `default` address space.
 
+> if you don't have `curl` but `wget` you can use it in the following way `wget --header="content-type: application/json" --post-file=addresses.json --no-check-certificate https://52.166.6.51:443/apis/enmasse.io/v1/addresses/default`
+
 ### Connecting with AMQP
 
 Using Qpid Proton Python examples, [sender](http://qpid.apache.org/releases/qpid-proton-0.18.0/proton/python/examples/simple_send.py.html) and [receiver](http://qpid.apache.org/releases/qpid-proton-0.18.0/proton/python/examples/simple_recv.py.html).
@@ -188,6 +190,8 @@ Running the receiver for getting 10 messages.
 Running the sender for sending 10 messages.
 
     ./simple_send.py -a "amqps://52.166.123.203:5671/myanycast" -m 10
+
+> There is no need for getting TLS certificates from the AMQP exposed endpoint because the above clients don't do the verification.
 
 ### Connecting with MQTT
 
@@ -204,4 +208,4 @@ Running the receiver.
 
 Running the server.
 
-    ./tls_mqtt_send.py -c 52.174.51.191 -p 8883 -t mytopic -q 0 -s ./certs/tls.crt -m "Hello EnMasse"
+    ./tls_mqtt_send.py -c 52.174.51.191 -p 8883 -t mytopic -q 1 -s ./certs/tls.crt -m "Hello EnMasse"
