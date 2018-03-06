@@ -127,7 +127,7 @@ Taking a look at services, some of them are exposed externally through load bala
     subscription         10.0.177.25    <none>           5672/TCP                                          6m
 
 
-The web console for handling address is accessible through the `console-external` service, opening a browser at `https://40.68.154.198:8081/#/dashboard`.
+The web console for handling address is accessible through the `console-external` service, opening a browser at `https://40.68.154.198:8081`.
 The related REST API are accessible at `https://13.93.81.228:443/apis/enmasse.io/v1`.
 
 ### Deploying addresses
