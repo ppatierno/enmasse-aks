@@ -1,0 +1,14 @@
+
+{
+    "apiVersion": "enmasse.io/v1",
+    "kind": "AddressList",
+    "items": [
+      {
+        "spec": {
+          "address": "IAE",
+          "type": "topic",
+          "plan": "sharded-topic"
+        }
+      }
+    ]
+}

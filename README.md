@@ -106,7 +106,7 @@ After a while a set of Pods should be running :
 
 Other than the deployed services, it's useful to exposing the REST API as well in order to create addresses using the command line sending HTTP requests using `curl`.
 
-    kubectl apply -f kubernetes/addons/external-lb.yaml -n enmasse    
+    kubectl apply -f kubernetes/addons/external-lb.yaml -n enmasse
 
 Taking a look at services, some of them are exposed externally through load balancer and external IP addresses.
 
