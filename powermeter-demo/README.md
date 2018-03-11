@@ -1,12 +1,19 @@
-MQTT subscriber on : 
+The only needed "sharded-topic" is :
 
-IAE/powerMeterFast/DE-2/#
+`IAE`
 
-MQTT publisher to : 
+The test environment has a Zigbee-MQTT gateway which publishes data to following topics on behalf of connected Zigbee devices : 
 
-IAE/powerMeterFast/DE-2/0013a200416486d4
-IAE/powerMeterFast/DE-2/0013a200410815b7
+`IAE/powerMeterFast/DE-2/0013a200416486d4`
 
-The only sharded-topic needed is :
+`IAE/powerMeterFast/DE-2/0013a200410815b7`
 
-IAE
+The monitoring application has an MQTT subscriber on : 
+
+`IAE/powerMeterFast/DE-2/#`
+
+or just :
+
+`IAE/#`
+
+
