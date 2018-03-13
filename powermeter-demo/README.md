@@ -1,3 +1,7 @@
+After downloding the latest EnMasse 0.17.1 release from [here](https://github.com/EnMasseProject/enmasse/releases) and unpacked it locally, the Azure CLI can be used through the `microsoft/azure-cli:latest` Docker image running it in the following way :
+
+    docker run -it -v /home/ppatiern/Downloads/enmasse-0.17.1:/enmasse microsoft/azure-cli:latest
+
 The only needed "sharded-topic" is :
 
 `IAE`
